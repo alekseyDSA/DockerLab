@@ -1,0 +1,42 @@
+services:
+  # Генератор самоподписанных сертификатов
+  ssl-gen:
+    build:
+      context: .
+      dockerfile: Dockerfile.ssl-gen
+    container_name: ssl-gen-setup
+    volumes:
+      - ./certs/self-signed:/certs
+    restart: "no"
+
+  # Очистка сертификатов (опционально)
+  ssl-clean:
+    image: alpine:latest
+    container_name: ssl-clean
+    volumes:
+      - ./certs/self-signed:/certs
+    entrypoint: |
+      /bin/sh -c "
+        echo '🧹 Очистка самоподписанных сертификатов...'
+        rm -f /certs/localhost.crt /certs/localhost.key
+        echo '✅ Готово'
+      "
+    restart: "no"
+
+  # Проверка сертификатов
+  ssl-check:
+    image: alpine:latest
+    container_name: ssl-check
+    volumes:
+      - ./certs/self-signed:/certs
+    entrypoint: |
+      /bin/sh -c "
+        if [ -f /certs/localhost.crt ]; then
+          echo '✅ Сертификаты существуют:'
+          openssl x509 -in /certs/localhost.crt -text -noout | grep -E 'Subject:|Not After'
+        else
+          echo '❌ Сертификаты не найдены'
+          exit 1
+        fi
+      "
+    restart: "no"

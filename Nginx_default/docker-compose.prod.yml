@@ -1,0 +1,26 @@
+services:
+  nginx:
+    ports:
+      - "${HTTP_PORT:-80}:80"
+      - "${HTTPS_PORT:-443}:443"
+    depends_on:
+      certbot:
+        condition: service_healthy
+
+  certbot:
+    entrypoint: |
+      /bin/sh -c "
+        trap exit TERM
+        echo '🟢 Certbot запущен в режиме продакшена'
+        while :; do
+          certbot renew
+          sleep 12h & wait $${!}
+        done
+      "
+    healthcheck:
+      test: ["CMD", "certbot", "certificates"]
+      interval: 1h
+      timeout: 30s
+      retries: 3
+      start_period: 30s
+    restart: unless-stopped

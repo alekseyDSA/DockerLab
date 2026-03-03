@@ -1,0 +1,10 @@
+# Dockerfile.ssl-gen
+FROM alpine:latest
+
+RUN apk add --no-cache openssl
+
+COPY scripts/gen-ssl.sh /usr/local/bin/gen-ssl.sh
+RUN chmod +x /usr/local/bin/gen-ssl.sh
+
+VOLUME /certs
+ENTRYPOINT ["/usr/local/bin/gen-ssl.sh"]
