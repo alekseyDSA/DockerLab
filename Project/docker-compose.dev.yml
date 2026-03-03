@@ -1,0 +1,28 @@
+services:
+  nginx:
+    ports:
+      - "${HTTP_PORT:-8080}:80"
+      - "${HTTPS_PORT:-8443}:443"
+
+
+  certbot:
+    profiles:
+      - never-used-in-dev
+    entrypoint: |
+      /bin/sh -c "
+        echo '🔵 Certbot отключен в режиме разработки'
+        sleep infinity
+      "
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: frontend-${ENVIRONMENT}
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - web-network
+    restart: unless-stopped
