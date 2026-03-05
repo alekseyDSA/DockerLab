@@ -16,8 +16,19 @@ desktop.ini
 
 
 .env
+
 .secrets
 *.key
 *.crt
 __pycache__/
+node_modules/
 *.pyc
+Project/frontend/dist/
+dist/
+build/
+data/
+certbot/www/
+Nginx_default/data/
+Nginx_default/certbot/www/
+Project/data/
+Project/certbot/www/

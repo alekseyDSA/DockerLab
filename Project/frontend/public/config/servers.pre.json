@@ -1,0 +1,25 @@
+{
+  "registrators": [
+    {
+      "id": 1,
+      "ip": "192.168.80.24",
+      "port": 8100,
+      "name": "Сервер 1 (хирургия)",
+      "type": "pre-registration"
+    },
+    {
+      "id": 2,
+      "ip": "192.168.80.25",
+      "port": 8100,
+      "name": "Сервер 2 (терапия)",
+      "type": "pre-registration"
+    },
+    {
+      "id": 3,
+      "ip": "192.168.80.26",
+      "port": 8100,
+      "name": "Сервер 3 (детское)",
+      "type": "pre-registration"
+    }
+  ]
+}

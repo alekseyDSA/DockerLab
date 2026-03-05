@@ -1,0 +1,11 @@
+{
+  "registrators": [
+    {
+      "id": 1,
+      "ip": "192.168.80.25",
+      "port": 8081,
+      "name": "Основной сервер очереди",
+      "type": "regular-registration"
+    }
+  ]
+}
