@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "docker-dev": "vite --host 0.0.0.0 --port 3000",
-    "dev": "vite --host --port 3000",
+    "docker-dev": "vite --host 0.0.0.0 --port 5173",
+    "dev": "vite --host --port 5173",
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",
@@ -34,6 +34,4 @@
     "husky": "^8.0.0",
     "lint-staged": "^13.2.0"
   }
-
 }
-

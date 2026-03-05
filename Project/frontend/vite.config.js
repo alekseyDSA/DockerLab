@@ -10,9 +10,27 @@ export default defineConfig({
         },
     },
     server: {
-        port: 3000,
+        port: 5173,
         host: true,
-        // Прокси больше не нужен - запросы будут идти напрямую
+        strictPort: true,
+        allowedHosts: [  // Добавьте это
+            'localhost',
+            'frontend',
+            'frontend-development',
+            'nginx',
+            'nginx-ssl-development',
+            '.localhost'  // Разрешает все поддомены localhost
+        ],
+        hmr: {
+            protocol: 'ws',
+            host: 'localhost',
+            port: 5173, // Изменено с 8080 на 5173
+            clientPort: 5173 // Изменено с 8080 на 5173
+        },
+        watch: {
+            usePolling: true,
+        },
+        cors: true,
     },
     build: {
         outDir: 'dist',

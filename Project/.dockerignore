@@ -1,0 +1,8 @@
+# .dockerignore в папке frontend/
+node_modules
+.git
+*.log
+.env
+.gitignore
+README.md
+tests/

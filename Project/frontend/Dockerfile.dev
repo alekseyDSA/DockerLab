@@ -2,11 +2,17 @@ FROM node:18-alpine
 
 WORKDIR /app
 
+# Копируем package.json и package-lock.json
 COPY package*.json ./
+
+# Устанавливаем зависимости
 RUN npm install
 
+# Копируем исходный код
 COPY . .
 
+# Открываем порт 5173
 EXPOSE 5173
 
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "5173"]
+# ИСПРАВЛЕНО: используем shell form вместо exec form для диагностики
+CMD npm run docker-dev

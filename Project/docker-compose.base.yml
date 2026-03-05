@@ -10,6 +10,18 @@ services:
     restart: unless-stopped
     networks:
       - web-network
+    deploy:
+      resources:
+        limits:
+          memory: 2048M
+        reservations:
+          memory: 1024M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        tag: "{{.Name}}"
 
   certbot:
     image: certbot/certbot
